@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 public class Feld extends Bild {
 
 	private static final long serialVersionUID = -319736981836351920L;
+	
+	Figur figur;
 
 	public Feld(boolean white) {
 		super("weiﬂes_Feld");

@@ -5,6 +5,8 @@ public class Schachbrett {
 	private static final long serialVersionUID = 1848795434219269637L;
 
 	Feld[][] Felder = new Feld[8][8];
+	
+	
 
 	public Schachbrett() {
 
@@ -15,7 +17,9 @@ public class Schachbrett {
 				} else {
 					Felder[i][j] = new Feld(false);
 				}
-
+				if(j == 6) {
+					Felder[i][j].figur = new Figur("weiﬂer_Bauer");
+				}
 			}
 		}
 	}

@@ -46,8 +46,16 @@ public class Game extends JFrame {
 
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
+				if(brett.Felder[i][j].figur != null) {
+					panel.add(brett.Felder[i][j].figur);
+					brett.Felder[i][j].figur.setBounds(100 + 100 * i, 100 + 100 * j, 100, 100);
+				}
 				panel.add(brett.Felder[i][j]);
 				brett.Felder[i][j].setBounds(100 + 100 * i, 100 + 100 * j, 100, 100);
+				if(brett.Felder[i][j].figur != null) {
+					
+				}
+				
 			}
 		}
 	}
