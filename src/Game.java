@@ -55,7 +55,6 @@ public class Game extends JFrame {
 				if(brett.Felder[i][j].figur != null) {
 					
 				}
-				
 			}
 		}
 	}

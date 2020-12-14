@@ -1,0 +1,4 @@
+-restlichen Figuren hinzufügen (alles außer Bauern)
+-Bewegen von Figuren hinzufügen
+-Schach + Schachmatt erkennen
+-Figurenbewegungen als Notation erkennen (für den online spielmodus nötig)
