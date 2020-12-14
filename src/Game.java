@@ -52,9 +52,7 @@ public class Game extends JFrame {
 				}
 				panel.add(brett.Felder[i][j]);
 				brett.Felder[i][j].setBounds(100 + 100 * i, 100 + 100 * j, 100, 100);
-				if(brett.Felder[i][j].figur != null) {
-					
-				}
+				System.out.println("test");
 			}
 		}
 	}
