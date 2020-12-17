@@ -1,4 +1,9 @@
 import java.awt.Color;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -9,17 +14,25 @@ import javax.swing.JPanel;
 
 public class Game extends JFrame {
 
-	private int frameSizeX = 1000;
-	private int frameSizeY = 1000;
+	private int frameSizeX = 816;
+	private int frameSizeY = 839;
 
-	private int frameLocationX;
-	private int frameLocationY;
+	private int frameLocationX = 400;
+	private int frameLocationY = 100;
 
 	private JPanel panel;
+
+	private int numberOfSelected; // Variable die die Anzahl an ausgewählten Feldern speichert. Sollte immer 0
+									// oder 1 sein.
+
+	private Schachbrett brett;
+	
+	Point p;
 
 	public Game(String SpielModus) {
 
 		super();
+
 		// Einstellen des Frame bezüglich Größe und Position
 		this.setSize(frameSizeX, frameSizeY);
 		this.setLocation(frameLocationX, frameLocationY);
@@ -42,17 +55,63 @@ public class Game extends JFrame {
 
 		panel.setBackground(Color.RED);
 
-		Schachbrett brett = new Schachbrett();
+		brett = new Schachbrett();
 
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
-				if(brett.Felder[i][j].figur != null) {
+				if (brett.Felder[i][j].figur != null) {
 					panel.add(brett.Felder[i][j].figur);
-					brett.Felder[i][j].figur.setBounds(100 + 100 * i, 100 + 100 * j, 100, 100);
+
+					brett.Felder[i][j].figur.setBounds(100 * i, 100 * j, 100, 100);
 				}
+				brett.Felder[i][j].reihe = j;
+				brett.Felder[i][j].spalte = i;
 				panel.add(brett.Felder[i][j]);
-				brett.Felder[i][j].setBounds(100 + 100 * i, 100 + 100 * j, 100, 100);
-				System.out.println("test");
+				brett.Felder[i][j].setBounds(100 * i, 100 * j, 100, 100);
+				brett.Felder[i][j].addMouseListener(brett.Felder[i][j]);
+
+			}
+		}
+		// System.out.println(brett.Felder[5][3].spalte);
+		
+		
+
+		while (true) {
+			getNumberOfSelected();
+			if(numberOfSelected > 1) {
+				p = MouseInfo.getPointerInfo().getLocation();
+				for (int i = 0; i < 8; i++) {
+					for (int j = 0; j < 8; j++) {
+						if(brett.Felder[i][j].selected) {
+							if(i != (int) (Math.floor((p.x - this.getX())))/100 || j != (int) (Math.floor((p.y - this.getY())))/100) {
+								brett.Felder[i][j].demarkieren();
+							}
+						}
+						
+					}
+				}
+			}
+			// delay(10);
+		}
+
+	}
+
+	private static void delay(int zeit) {
+
+		try {
+			Thread.sleep(zeit);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void getNumberOfSelected() { // Methode, die numberOfSelected aktualisiert
+		numberOfSelected = 0;
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if (brett.Felder[i][j].selected) {
+					numberOfSelected++;
+				}
 			}
 		}
 	}
